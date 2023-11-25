@@ -8,6 +8,7 @@ const routes = require("./routes/user");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+const MONGODB_URI = process.env.MONGODB_URI
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +24,8 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-connectDB("mongodb://127.0.0.1:27017/userrecord")
+// connectDB("mongodb://127.0.0.1:27017/userrecord")
+connectDB(MONGODB_URI)
   .then(() => {
     console.log("Database Connected Successfully!");
     app.listen(PORT, () => {
